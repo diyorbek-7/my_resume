@@ -8,6 +8,9 @@
 //  - Back to top button
 // ============================================================
 
+// Debug mode - set to true to log animation status
+const DEBUG = false;
+
 (function () {
   const body = document.body;
   const nav = document.querySelector(".nav");
@@ -21,6 +24,11 @@
   const starfieldCanvas = document.getElementById("starfield");
   const tiltCards = document.querySelectorAll("[data-tilt]");
   const sections = document.querySelectorAll("main section[id]");
+  const emailBtn = document.getElementById("email-me-btn");
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+  const toastSubmessage = document.getElementById("toast-submessage");
+  const cursorSpotlight = document.querySelector(".cursor-spotlight");
 
   // Feature flags for motion / pointer effects
   const isTouchDevice =
@@ -41,6 +49,13 @@
   const STAR_SPEED = 0.5; // Pixels per frame (drift speed)
   const STAR_GLOW = 0.8; // Brightness/glow intensity (0-1)
   const PARALLAX_MOUSE = 0.3; // Mouse parallax strength (0-1, lower = subtler)
+  
+  // Cursor spotlight configuration
+  const SPOTLIGHT_INTENSITY = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue(
+      "--spotlight-intensity"
+    ) || "0.15"
+  );
 
   // ------------------------------------------------------------
   // Utility: Smooth scroll with offset for sticky header
@@ -135,27 +150,43 @@
   }
 
   // ------------------------------------------------------------
-  // Scroll reveal animations using IntersectionObserver
+  // Scroll reveal animations with stagger using IntersectionObserver
   // ------------------------------------------------------------
-  if ("IntersectionObserver" in window) {
+  if ("IntersectionObserver" in window && !prefersReducedMotion) {
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            entry.target.classList.add("in-view");
+            if (DEBUG) {
+              console.log("Animation triggered for:", entry.target.id || entry.target.className);
+            }
             observer.unobserve(entry.target);
           }
         });
       },
       {
-        threshold: 0.18,
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
       }
     );
 
-    revealSections.forEach((section) => revealObserver.observe(section));
+    revealSections.forEach((section) => {
+      revealObserver.observe(section);
+      if (DEBUG) {
+        console.log("Observing section:", section.id || section.className);
+      }
+    });
   } else {
-    // Fallback: show all sections
-    revealSections.forEach((section) => section.classList.add("is-visible"));
+    // Fallback: show all sections instantly
+    revealSections.forEach((section) => {
+      section.classList.add("is-visible");
+      section.classList.add("in-view");
+    });
+    if (DEBUG && prefersReducedMotion) {
+      console.log("Reduced motion detected - animations disabled");
+    }
   }
 
   // ------------------------------------------------------------
@@ -222,9 +253,21 @@
   }
 
   // ------------------------------------------------------------
-  // Starfield Canvas Animation
+  // Starfield Canvas Animation (starts automatically)
   // ------------------------------------------------------------
-  if (starfieldCanvas && !prefersReducedMotion) {
+  function initStarfield() {
+    if (!starfieldCanvas) return;
+    
+    if (prefersReducedMotion) {
+      // Static background for reduced motion
+      const ctx = starfieldCanvas.getContext("2d");
+      starfieldCanvas.width = window.innerWidth;
+      starfieldCanvas.height = window.innerHeight;
+      ctx.fillStyle = body.classList.contains("theme-light") ? "#f4f4f8" : "#050814";
+      ctx.fillRect(0, 0, starfieldCanvas.width, starfieldCanvas.height);
+      if (DEBUG) console.log("Starfield: Static mode (reduced motion)");
+      return;
+    }
     const ctx = starfieldCanvas.getContext("2d");
     let stars = [];
     let mouseX = 0;
@@ -316,18 +359,29 @@
       animationId = requestAnimationFrame(animate);
     }
 
-    // Mouse move handler (only on desktop)
+    // Mouse move handler (only on desktop, throttled)
     if (!isTouchDevice) {
+      let mouseUpdateRaf = null;
       window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX / window.innerWidth;
-        mouseY = e.clientY / window.innerHeight;
-      });
+        if (!mouseUpdateRaf) {
+          mouseUpdateRaf = requestAnimationFrame(() => {
+            mouseX = e.clientX / window.innerWidth;
+            mouseY = e.clientY / window.innerHeight;
+            mouseUpdateRaf = null;
+          });
+        }
+      }, { passive: true });
     }
 
     // Initialize and start
     resizeCanvas();
     initStars();
     animate();
+    
+    if (DEBUG) {
+      console.log("Starfield animation started");
+      console.log(`Stars: ${STAR_COUNT}, Speed: ${STAR_SPEED}, Glow: ${STAR_GLOW}`);
+    }
 
     // Handle resize
     let resizeTimeout;
@@ -338,22 +392,126 @@
         initStars();
       }, 100);
     });
-  } else if (starfieldCanvas) {
-    // Fallback: static dark background if reduced motion
-    const ctx = starfieldCanvas.getContext("2d");
-    starfieldCanvas.width = window.innerWidth;
-    starfieldCanvas.height = window.innerHeight;
-    ctx.fillStyle = body.classList.contains("theme-light") ? "#f4f4f8" : "#050814";
-    ctx.fillRect(0, 0, starfieldCanvas.width, starfieldCanvas.height);
+  }
+  
+  // Start starfield on DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStarfield);
+  } else {
+    initStarfield();
   }
 
 
   // ------------------------------------------------------------
-  // Card tilt + shine micro-interaction
+  // Email button with clipboard fallback
+  // ------------------------------------------------------------
+  if (emailBtn) {
+    const emailAddress = "shokirovdiyorbek779@gmail.com";
+    
+    async function copyToClipboard(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand("copy");
+          document.body.removeChild(textArea);
+          return true;
+        } catch (e) {
+          document.body.removeChild(textArea);
+          return false;
+        }
+      }
+    }
+    
+    function showToast() {
+      if (toast && toastMessage && toastSubmessage) {
+        toastMessage.textContent = "Email copied ✅";
+        toastSubmessage.textContent = "If nothing opened, set a default mail app.";
+        toast.classList.add("show");
+        
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 4000);
+      }
+    }
+    
+    emailBtn.addEventListener("click", async (e) => {
+      // Always copy to clipboard
+      const copied = await copyToClipboard(emailAddress);
+      if (copied) {
+        showToast();
+      }
+      // Let the mailto link work normally (don't preventDefault)
+    });
+  }
+
+  // ------------------------------------------------------------
+  // Hero animations on page load
+  // ------------------------------------------------------------
+  if (!prefersReducedMotion) {
+    const heroSection = document.querySelector(".hero-section");
+    if (heroSection && DEBUG) {
+      console.log("Hero animations enabled");
+    }
+  }
+
+  // ------------------------------------------------------------
+  // Cursor spotlight effect (desktop only)
+  // ------------------------------------------------------------
+  if (cursorSpotlight && !isTouchDevice && !prefersReducedMotion) {
+    if (DEBUG) console.log("Cursor spotlight enabled");
+    const root = document.documentElement;
+    let mouseX = 0.5;
+    let mouseY = 0.5;
+    let currentX = 0.5;
+    let currentY = 0.5;
+    let rafId = null;
+    
+    function updateSpotlight() {
+      // Smooth easing
+      currentX += (mouseX - currentX) * 0.15;
+      currentY += (mouseY - currentY) * 0.15;
+      
+      root.style.setProperty("--spotlight-x", `${currentX * 100}%`);
+      root.style.setProperty("--spotlight-y", `${currentY * 100}%`);
+      
+      rafId = requestAnimationFrame(updateSpotlight);
+    }
+    
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX / window.innerWidth;
+      mouseY = e.clientY / window.innerHeight;
+      
+      if (!rafId) {
+        body.classList.add("has-spotlight");
+        updateSpotlight();
+      }
+    }, { passive: true });
+    
+    // Stop animation when mouse leaves window
+    document.addEventListener("mouseleave", () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    });
+  }
+
+  // ------------------------------------------------------------
+  // Card tilt + shine micro-interaction (enhanced)
   // ------------------------------------------------------------
   if (tiltCards.length && !isTouchDevice && !prefersReducedMotion) {
     tiltCards.forEach((card) => {
       let rect;
+      let rafId = null;
 
       function updateTransform(e) {
         if (!rect) rect = card.getBoundingClientRect();
@@ -369,9 +527,13 @@
         const pointerX = ((e.clientX - rect.left) / rect.width) * 100;
         const pointerY = ((e.clientY - rect.top) / rect.height) * 100;
 
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
-        card.style.setProperty("--pointer-x", `${pointerX}%`);
-        card.style.setProperty("--pointer-y", `${pointerY}%`);
+        if (rafId) cancelAnimationFrame(rafId);
+        
+        rafId = requestAnimationFrame(() => {
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+          card.style.setProperty("--pointer-x", `${pointerX}%`);
+          card.style.setProperty("--pointer-y", `${pointerY}%`);
+        });
       }
 
       card.addEventListener("mouseenter", () => {
@@ -379,9 +541,13 @@
         card.classList.add("is-tilting");
       });
 
-      card.addEventListener("mousemove", updateTransform);
+      card.addEventListener("mousemove", updateTransform, { passive: true });
 
       card.addEventListener("mouseleave", () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
         card.classList.remove("is-tilting");
         card.style.transform = "";
       });
