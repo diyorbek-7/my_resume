@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diyorbek | AI & Robotics Resume</title>
+    <meta
+      name="description"
+      content="Modern interactive resume of Diyorbek – AI & Robotics undergraduate specializing in Data Analytics, Python, SQL, Microsoft Fabric, and Power BI."
+    />
+    <!-- Google Font (no build tools, direct link) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ========================================================= -->
+    <!--  Sticky Navigation                                         -->
+    <!-- ========================================================= -->
+    <header class="header">
+      <div class="nav-container">
+        <a href="#hero" class="logo">
+          <span class="logo-mark">D</span>
+          <span class="logo-text">Diyorbek</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <ul class="nav-list">
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="#social" class="nav-link">Social</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <!-- Dark mode toggle -->
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-icon sun">☀</span>
+            <span class="theme-icon moon">🌙</span>
+          </button>
+
+          <button
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+          >
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Starfield Background Canvas -->
+    <canvas id="starfield" class="starfield-canvas" aria-hidden="true"></canvas>
+    <!-- Vignette overlay for text readability -->
+    <div class="vignette-overlay" aria-hidden="true"></div>
+
+    <!-- ========================================================= -->
+    <!--  Main Content                                              -->
+    <!-- ========================================================= -->
+    <main id="hero">
+      <!-- Hero Section -->
+      <section
+        class="section hero-section reveal"
+        aria-labelledby="hero-title"
+        data-parallax="6"
+      >
+        <div class="hero-content">
+          <p class="hero-kicker">AI & Robotics • Data Analytics</p>
+          <h1 class="hero-title" id="hero-title">Hi, I'm <span>Diyorbek</span></h1>
+          <p class="hero-subtitle">
+            AI & Robotics Undergraduate&nbsp;|&nbsp;Data Analytics
+          </p>
+          <p class="hero-summary">
+            Motivated AI and Robotics undergraduate pursuing a bachelor's degree under a
+            <strong>100% merit-based scholarship</strong>. Proficient in Python (NumPy,
+            Pandas, Matplotlib), SQL, Microsoft Fabric, and Power BI, with a strong
+            interest in data analytics and AI-driven solutions. Adaptable, detail-oriented,
+            and eager to apply technical skills in real-world projects.
+          </p>
+
+          <dl class="hero-meta">
+            <div class="hero-meta-item">
+              <dt>Location</dt>
+              <dd>Uzbekistan</dd>
+            </div>
+            <div class="hero-meta-item">
+              <dt>Email</dt>
+              <dd>
+                <a href="mailto:shokirovdiyorbek779@gmail.com"
+                  >shokirovdiyorbek779@gmail.com</a
+                >
+              </dd>
+            </div>
+            <div class="hero-meta-item">
+              <dt>Phone</dt>
+              <dd>
+                <a href="tel:+998945102907">+998 945102907</a>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="hero-actions">
+            <!-- Replace href with your actual CV file path -->
+            <a
+              href="./Diyorbek_cv.pdf"
+              class="btn primary-btn"
+              download
+            >
+              Download CV
+            </a>
+            <a href="#contact" class="btn ghost-btn">Contact Me</a>
+          </div>
+
+          <div class="hero-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Microsoft Fabric</span>
+            <span class="tag">Power BI</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- About / Overview Section -->
+      <section
+        id="about"
+        class="section section-grid reveal"
+        aria-labelledby="about-title"
+      >
+        <div class="section-header">
+          <p class="section-kicker">Overview</p>
+          <h2 class="section-title" id="about-title">About Me</h2>
+          <p class="section-subtitle">
+            I combine a strong academic foundation in AI & Robotics with hands-on data
+            analytics experience to build insightful, data-driven solutions.
+          </p>
+        </div>
+
+        <div class="card glass" data-tilt>
+          <h3 class="card-title">What I Do</h3>
+          <p class="card-body">
+            I explore how intelligent systems and data analytics can work together to
+            solve real-world problems. From cleaning and transforming raw datasets to
+            building dashboards and visualizations, I focus on turning data into clear,
+            actionable insights.
+          </p>
+          <ul class="icon-list">
+            <li>Data cleaning & exploratory analysis</li>
+            <li>Building dynamic Power BI reports</li>
+            <li>Prototyping AI-driven data workflows</li>
+            <li>Communicating insights with clear visuals</li>
+          </ul>
+        </div>
+
+        <div class="card glass" data-tilt>
+          <h3 class="card-title">Currently Focused On</h3>
+          <p class="card-body">
+            Deepening my understanding of AI-powered analytics and modern data platforms
+            like Microsoft Fabric, while strengthening my foundation in mathematics,
+            algorithms, and robotics.
+          </p>
+          <ul class="pill-list">
+            <li>AI & Robotics fundamentals</li>
+            <li>Python for data analysis</li>
+            <li>End-to-end analytics in Fabric</li>
+            <li>Advanced Power BI dashboards</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section
+        id="experience"
+        class="section reveal"
+        aria-labelledby="experience-title"
+      >
+        <div class="section-header">
+          <p class="section-kicker">Experience</p>
+          <h2 class="section-title" id="experience-title">Personal & Academic Projects</h2>
+          <p class="section-subtitle">
+            Hands-on experience through academic work and personal projects focused on
+            data analytics and modern BI tools.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item card glass" data-tilt>
+            <header class="timeline-header">
+              <div>
+                <h3 class="timeline-role">Personal / Academic Projects</h3>
+                <p class="timeline-org">Self-initiated & University Projects</p>
+              </div>
+              <span class="timeline-date">09/24 – Present</span>
+            </header>
+            <ul class="timeline-list">
+              <li>Performed data analysis using Python, including NumPy and Pandas.</li>
+              <li>
+                Built interactive dashboards and reports using Power BI to visualize key
+                metrics and support data-driven decisions.
+              </li>
+              <li>
+                Worked with Microsoft Fabric to manage, transform, and model data
+                efficiently for analytics workflows.
+              </li>
+              <li>
+                Performed data cleaning, transformation, and exploratory data analysis to
+                improve data quality and usability.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section
+        id="education"
+        class="section reveal"
+        aria-labelledby="education-title"
+      >
+        <div class="section-header">
+          <p class="section-kicker">Education</p>
+          <h2 class="section-title" id="education-title">Academic Background</h2>
+        </div>
+
+        <div class="education-grid">
+          <article class="card glass education-card" data-tilt>
+            <header class="education-header">
+              <div>
+                <h3 class="education-school">New Uzbekistan University</h3>
+                <p class="education-degree">Bachelor’s in AI and Robotics</p>
+              </div>
+              <span class="education-date">08/24 – Present</span>
+            </header>
+            <ul class="education-meta">
+              <li>Located in Tashkent, Uzbekistan</li>
+              <li>Bachelor's Degree in AI and Robotics (ongoing)</li>
+              <li>Awarded a 100% merit-based scholarship for academic excellence</li>
+              <li>
+                Relevant coursework includes data analytics, database and network design,
+                and programming
+              </li>
+              <li>Strong academic background with a high school GPA of 5.0</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section reveal" aria-labelledby="skills-title">
+        <div class="section-header">
+          <p class="section-kicker">Capabilities</p>
+          <h2 class="section-title" id="skills-title">Skills & Tools</h2>
+          <p class="section-subtitle">
+            A growing toolkit across programming, analytics, and visualization — with an
+            emphasis on delivering clear insights from complex data.
+          </p>
+        </div>
+
+        <div class="skills-layout">
+          <!-- Skill Cards -->
+          <div class="skills-grid">
+            <article class="skill-card glass" data-tilt>
+              <h3 class="skill-title">Data Analytics</h3>
+              <p class="skill-body">
+                From data cleaning to exploratory analysis, I use Python and modern BI tools
+                to reveal patterns and trends.
+              </p>
+              <ul class="pill-list">
+                <li>Data Analysis</li>
+                <li>Data Visualization</li>
+                <li>Problem Solving</li>
+              </ul>
+            </article>
+
+            <article class="skill-card glass" data-tilt>
+              <h3 class="skill-title">Python Ecosystem</h3>
+              <p class="skill-body">
+                Comfortable working with core data libraries to manipulate, transform, and
+                explore datasets.
+              </p>
+              <ul class="pill-list">
+                <li>Python</li>
+                <li>NumPy</li>
+                <li>Pandas</li>
+                <li>Matplotlib</li>
+              </ul>
+            </article>
+
+            <article class="skill-card glass" data-tilt>
+              <h3 class="skill-title">BI & Analytics Platforms</h3>
+              <p class="skill-body">
+                Building dashboards and leveraging cloud data platforms for scalable
+                analytics.
+              </p>
+              <ul class="pill-list">
+                <li>Power BI</li>
+                <li>Microsoft Fabric</li>
+                <li>Microsoft Excel</li>
+              </ul>
+            </article>
+
+            <article class="skill-card glass" data-tilt>
+              <h3 class="skill-title">Databases & Querying</h3>
+              <p class="skill-body">
+                Writing efficient SQL queries to retrieve, join, and aggregate data for
+                analysis and reporting.
+              </p>
+              <ul class="pill-list">
+                <li>SQL</li>
+                <li>Relational databases</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- Animated Skill Bars -->
+          <div class="skill-bars card glass" data-tilt>
+            <h3 class="card-title">Skill Focus</h3>
+            <p class="card-body">
+              Visual representation of current strengths and areas of focus. Bars animate as
+              you scroll into view.
+            </p>
+
+            <div class="skill-bar" data-level="90">
+              <div class="skill-bar-header">
+                <span>Python & Data Analysis</span>
+                <span class="skill-percentage">90%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar" data-level="85">
+              <div class="skill-bar-header">
+                <span>Power BI & Visualization</span>
+                <span class="skill-percentage">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar" data-level="80">
+              <div class="skill-bar-header">
+                <span>SQL & Databases</span>
+                <span class="skill-percentage">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="skill-bar" data-level="75">
+              <div class="skill-bar-header">
+                <span>Microsoft Fabric</span>
+                <span class="skill-percentage">75%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section
+        id="contact"
+        class="section reveal"
+        aria-labelledby="contact-title"
+      >
+        <div class="section-header">
+          <p class="section-kicker">Contact</p>
+          <h2 class="section-title" id="contact-title">Let’s Connect</h2>
+          <p class="section-subtitle">
+            Feel free to reach out about opportunities, collaborations, or just to say hi.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card glass contact-card" data-tilt>
+            <h3 class="card-title">Contact Details</h3>
+            <ul class="contact-list">
+              <li>
+                <span class="contact-label">Email</span>
+                <a href="mailto:shokirovdiyorbek779@gmail.com"
+                  >shokirovdiyorbek779@gmail.com</a
+                >
+              </li>
+              <li>
+                <span class="contact-label">Phone</span>
+                <a href="tel:+998945102907">+998 945102907</a>
+              </li>
+              <li>
+                <span class="contact-label">Location</span>
+                <span>Uzbekistan</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card glass contact-card" data-tilt>
+            <h3 class="card-title">Quick Message</h3>
+            <p class="card-body">
+              Click below to open your email client with my address pre-filled, so you can
+              send a message in one step.
+            </p>
+            <a
+              href="mailto:shokirovdiyorbek779@gmail.com?subject=Hello%20Diyorbek&body=Hi%20Diyorbek,"
+              class="btn primary-btn full-width"
+            >
+              Email Me
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Find Me On Section -->
+      <section
+        id="social"
+        class="section reveal"
+        aria-labelledby="social-title"
+      >
+        <div class="section-header">
+          <p class="section-kicker">Connect</p>
+          <h2 class="section-title" id="social-title">Find Me On</h2>
+          <p class="section-subtitle">
+            Feel free to connect with me
+          </p>
+        </div>
+
+        <div class="social-grid">
+          <a
+            href="https://github.com/dashboard"
+            class="social-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            data-tooltip="GitHub"
+          >
+            <svg
+              class="social-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              />
+            </svg>
+            <span class="social-tooltip">GitHub</span>
+          </a>
+
+          <a
+            href="https://t.me/Diyorbek_Muhammadovich"
+            class="social-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram Profile"
+            data-tooltip="Telegram"
+          >
+            <svg
+              class="social-icon"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15.056-.212.06-.103.16-.138.262-.083.106.057 1.655 1.03 4.075 3.024.386.353.732.524 1.102.5.303-.02.829-.356 1.056-.69.255-.353.356-.73.25-1.127-.24-.9-1.127-2.28-1.58-3.05-.54-.9-1.132-.9-1.54-.9l-.34.008c-.38.04-.98.16-1.4.3-.6.2-1.08.2-1.54-.2-.42-.35-.98-.9-1.52-1.38-.48-.39-.99-.81-1.38-.84-.11-.02-.24-.02-.38.02z"
+              />
+            </svg>
+            <span class="social-tooltip">Telegram</span>
+          </a>
+
+          <a
+            href="https://www.instagram.com/d_muhammadovich/"
+            class="social-button"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram Profile"
+            data-tooltip="Instagram"
+          >
+            <svg
+              class="social-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            <span class="social-tooltip">Instagram</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-content">
+          <p class="footer-left">Designed and Developed by Diyorbek Shokirov</p>
+          <p class="footer-center">
+            &copy; <span id="year"></span> Diyorbek Shokirov
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://github.com/dashboard"
+              class="footer-social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://t.me/Diyorbek_Muhammadovich"
+              class="footer-social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15.056-.212.06-.103.16-.138.262-.083.106.057 1.655 1.03 4.075 3.024.386.353.732.524 1.102.5.303-.02.829-.356 1.056-.69.255-.353.356-.73.25-1.127-.24-.9-1.127-2.28-1.58-3.05-.54-.9-1.132-.9-1.54-.9l-.34.008c-.38.04-.98.16-1.4.3-.6.2-1.08.2-1.54-.2-.42-.35-.98-.9-1.52-1.38-.48-.39-.99-.81-1.38-.84-.11-.02-.24-.02-.38.02z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/d_muhammadovich/"
+              class="footer-social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      type="button"
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
